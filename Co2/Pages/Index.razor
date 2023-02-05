@@ -1,0 +1,59 @@
+﻿@page "/"
+
+@using Co2
+@using Co2.Models
+@inject NavigationManager navigationManager
+
+<h1>Medarbejder liste</h1>
+<table class="table table-striped-columns">
+	<tr>
+		<td>Navn</td>
+		<td>Adresse</td>
+		<td></td>
+	</tr>
+	@foreach(var employe in employes)
+	{
+		<tr>
+			<td>@employe.Name</td>
+			<td>@employe.Address</td>
+			<td><button @onclick="() => PassData(employe.Name, employe.Address)">Rediger...</button></td>
+		</tr>
+	}
+</table>
+
+@code {
+	public Employe[] employes;
+
+	protected override void OnInitialized()
+	{
+		var employesList = new[]
+		{
+			new Employe{
+				Id=1,
+				Name="Jens Hansen",
+				Address="Marksvinget 17, 4600 Køge"
+			},
+			new Employe{
+				Id=2,
+				Name="Hanse Pedersen",
+				Address="Højebakker 4, 5100 Odense"
+			},
+			new Employe{
+				Id=3,
+				Name="Hanne Markussen",
+				Address="Strandhaven 18, 2680 Solrød"
+			},
+			new Employe{
+				Id=4,
+				Name="Ole Jensen",
+				Address="Syvgården 21, 8765 Herning"
+			}
+	};
+		employes = employesList;
+	}
+
+	private void PassData(string name, string address)
+	{
+		navigationManager.NavigateTo($"/editemploye/{name}/{address}");
+	}
+}

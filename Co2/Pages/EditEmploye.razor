@@ -1,0 +1,28 @@
+﻿@page "/editemploye/{Name}/{Address}"
+
+@using Co2.Models
+@inject NavigationManager navigationManager
+
+<h3>EditEmploye</h3>
+
+Her kan du redigere @Name:<br />
+
+<form>
+    <label for="name">Navn</label>
+    <input type="text" id="name" name="name" value="@Name"/>
+    <label for="addres">Adresse</label>
+    <input type="text" id="addres" name="addres" value="@Address" />
+    <button type="submit" @onclick="() => SaveData()">Gem</button>
+</form>
+
+@code {
+    [Parameter]
+    public string? Name { get; set; }
+    [Parameter]
+    public string? Address { get; set; }
+
+    public void SaveData()
+    {
+        navigationManager.NavigateTo($"");
+    }
+}
